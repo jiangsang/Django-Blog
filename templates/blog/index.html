@@ -1,0 +1,55 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block 标题 %}首页{% endblock 标题 %}
+{% block 首页高亮 %}active{% endblock 首页高亮 %}
+{% block 首页高亮1 %}active{% endblock 首页高亮1 %}
+{% if 博客 %}
+    {% block 数量%}{{ 博客.count}}{% endblock 数量%}
+{% endif %}
+
+{% block 主体 %}
+
+  <div class="banner">
+    <div class="cont w1000">
+      <div class="title">
+        <h3>MY SPACE</h3>
+        <h4>well-balanced heart</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="cont w1000">
+      <div class="title">
+        <span class="layui-breadcrumb" lay-separator="|">
+            <a href="{% url '主页'%}" {% if 位置 == '默认' %}class="active"{% endif %}>默认</a>
+            <a href="{% url '主页' num=1%}" {% if 位置 == 'IT相关' %}class="active"{% endif %}>IT相关</a>
+            <a href="{% url '主页' num=2%}" {% if 位置 == '好软分享' %}class="active"{% endif %}>好软分享</a>
+            <a href="{% url '主页' num=3%}" {% if 位置 == '摄影设计' %}class="active"{% endif %}>摄影设计</a>
+            <a href="{% url '主页' num=4%}" {% if 位置 == '旅游杂记' %}class="active"{% endif %}>旅游杂记</a>
+        </span>
+      </div>
+      <div class="list-item ">
+          {% for blog in 博客 %}
+        <div class="item">
+          <div class="layui-fluid">
+            <div class="layui-row">
+              <div class="layui-col-xs12 layui-col-sm4 layui-col-md5">
+                <div class="img"><img src="{{ blog.headpicture.url }}" alt="{{ blog.title }}"></div>
+              </div>
+              <div class="layui-col-xs12 layui-col-sm8 layui-col-md7">
+                <div class="item-cont">
+                  <h3>{{ blog.title }}<button class="layui-btn layui-btn-danger new-icon">new</button></h3>
+                  <h5>{{ blog.category }}</h5>
+                  <div class="text">{{ blog.desc }}</div>
+                  <a href="{% url '详情页' blog.id %}" class="go-icon"></a>
+                </div>
+            </div>
+            </div>
+           </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock 主体 %}

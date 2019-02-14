@@ -1,0 +1,67 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block 标题 %}光影流年{% endblock 标题 %}
+{% block 照片高亮 %}active{% endblock 照片高亮 %}
+{% block 照片高亮1 %}active{% endblock 照片高亮1 %}
+{% block 主体 %}
+  <div class="album-content w1000"  id="layer-photos-demo" class="layer-photos-demo">
+    <div class="img-list">
+      <div class="layui-fluid" style="padding:0">
+        <div class="layui-row layui-col-space30 space">
+        {% for pic in 照片 %}
+            {% if forloop.counter == 1 %}
+                  <div class="img-info">
+                  <img lay-src="{{ pic.photo.url }}" width="80%" alt="">
+                  <div class="title">
+                    <p class="data">最新上传<span>{{ pic.time|date:'Y /m /d' }}</span></p>
+                    <p class="text">{{ pic.name }}</p>
+                  </div>
+                </div>
+            {% else %}
+                <div class="layui-col-xs12 layui-col-sm4 layui-col-md4">
+                <div class="item">
+                  <img lay-src="{{ pic.photo.url }}">
+                  <div class="cont-text">
+                    <div class="data">{{ pic.time|date:'Y /m /d' }}</div>
+                    <p class="address"><i class="layui-icon layui-icon-location"></i><span>{{ pic.place }}</span></p>
+                    <p class="briefly">{{ pic.name }}</p>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+          <div class="layui-col-xs12 layui-col-sm4 layui-col-md4">
+            <div class="item">
+              <img lay-src="{% static '/res/img/xc_img4.jpg'%}">
+              <div class="cont-text">
+                <div class="data">2018/08/08</div>
+                <p class="address"><i class="layui-icon layui-icon-location"></i><span>江西九江</span></p>
+                <p class="briefly">今日天气晴朗,庐山一日游</p>
+              </div>
+            </div>
+          </div>
+          <div class="layui-col-xs12 layui-col-sm4 layui-col-md4">
+            <div class="item">
+              <img lay-src="{% static '/res/img/xc_img5.jpg'%}">
+              <div class="cont-text">
+                <div class="data">2018/08/08</div>
+                <p class="address"><i class="layui-icon layui-icon-location"></i><span>江西九江</span></p>
+                <p class="briefly">今日天气晴朗,庐山一日游</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="demo"></div>
+    </div>
+  </div>
+{% endblock 主体 %}
+{% block js事件 %}
+    layer.photos({
+        photos: '#layer-photos-demo'
+        ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+        ,tab:function(pic,layero){
+          console.log(pic,layero)
+        }
+      });
+{% endblock js事件%}

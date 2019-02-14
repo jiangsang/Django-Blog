@@ -1,0 +1,13 @@
+{% extends "admin/base.html" %}
+{% load static %} 
+
+{% block title %}{{ title }} | {{ site_title|default:_('刘江的博客后台管理')}}{%endblock %}
+
+{% block branding %}
+<a href="{% url 'admin:index' %}" class="django-admin-logo">
+    <!-- Django Administration -->
+    <h4 >刘江的个人博客后台管理</h4>
+</a>
+{% endblock branding %}
+
+{% block nav-global %}{% endblock %}

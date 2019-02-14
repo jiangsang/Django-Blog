@@ -1,0 +1,69 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block 标题 %}留言{% endblock 标题 %}
+{% block 留言高亮 %}active{% endblock 留言高亮%}
+{% block 留言高亮1 %}active{% endblock 留言高亮1%}
+{% block 主体 %}
+  <div class="content whisper-content leacots-content">
+    <div class="cont w1000">
+      <div class="whisper-list">
+        <div class="item-box">
+          <div class="review-version">
+              <div class="form-box">
+                <img class="banner-img" src="{% static '/res/img/liuyan.jpg'  %}">
+                <div class="form">
+                  <form class="layui-form" method="post" action="{% url '留言'%}">
+                      {% csrf_token %}
+                    <div class="layui-form-item layui-form-text">
+                      <div class="layui-input-block">
+                        <textarea name="留言" placeholder="既然来了，就说几句" class="layui-textarea" required></textarea>
+                      </div>
+                    </div>
+                    <div class="layui-form-item">
+                      <div class="layui-input-block" style="text-align: right;">
+                        <button class="layui-btn definite" type="submit">确定</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="volume">
+                全部留言 {% if leacots %}
+                    <span>leacots.cout</span>
+                {% endif %}
+              </div>
+              <div class="list-cont">
+                  {% for foo in leacots %}
+                      <div class="cont">
+                      <div class="img">
+                        <img src="{% static '/res/img/header.png' %}" alt="">
+                      </div>
+                      <div class="text">
+                        <p class="tit"><span class="name">#{{ forloop.counter }}楼</span><span class="data">{{ foo.time|date:'Y -m -d H:i:s' }}</span></p>
+                        <p class="ct">{{ foo.content }}</p>
+                      </div>
+                    </div>
+                  {% endfor %}
+              </div>
+          </div>
+        </div>
+      </div>
+      <div id="demo" style="text-align: center;"></div>
+    </div>
+  </div>
+{#  <script type="text/html" id="laytplCont">#}
+{#    <div class="cont">#}
+{#      <div class="img">#}
+{#        {{#  if(d.avatar){ }}#}
+{#        <img src="{{d.avatar}}" alt="">#}
+{#        {{#  } else { }}#}
+{#        <img src="../res/img/header.png" alt="">#}
+{#        {{# } }}#}
+{#      </div>#}
+{#      <div class="text">#}
+{#        <p class="tit"><span class="name">{{d.name}}</span><span class="data">2018/06/06</span></p>#}
+{#        <p class="ct">{{d.cont}}</p>#}
+{#      </div>#}
+{#    </div>#}
+{#  </script>#}
+{% endblock %}

@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>{% block 标题 %}未命名{% endblock 标题 %}</title>
+  <link rel="stylesheet" type="text/css" href="{% static '/res/layui/css/layui.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static '/res/css/main.css' %}">
+  <link rel="stylesheet" href="{% block css %}{% endblock css %}">
+</head>
+<body>
+  <div class="header">
+    <div class="menu-btn">
+      <div class="menu"></div>
+    </div>
+    <h1 class="logo">
+      <a href="{% url '主页'%}">
+        <span>MYBLOG</span>
+        <img src="../res/img/logo.png">
+      </a>
+    </h1>
+    <div class="nav">
+      <a href="{% url '主页'%}" class="{% block 首页高亮 %}{% endblock 首页高亮 %}">博客</a>
+      <a href="{% url '留言'%}" class="{% block 留言高亮 %}{% endblock 留言高亮%}">留言</a>
+      <a href="{% url '照片'%}" class="{% block 照片高亮 %}{% endblock 照片高亮%}">光影流年</a>
+      <a href="{% url '关于'%}" class="{% block 关于高亮 %}{% endblock 关于高亮%}">关于</a>
+    </div>
+    <ul class="layui-nav header-down-nav">
+      <li class="layui-nav-item"><a href="{% url '主页'%}" class="{% block 首页高亮1 %}{% endblock 首页高亮1 %}">博客</a></li>
+      <li class="layui-nav-item"><a href="{% url '留言'%}" class="{% block 留言高亮1 %}{% endblock 留言高亮1%}">留言</a></li>
+      <li class="layui-nav-item"><a href="{% url '照片'%}" class="{% block 照片高亮1 %}{% endblock 照片高亮1%}">光影流年</a></li>
+      <li class="layui-nav-item"><a href="{% url '关于'%}" class="{% block 关于高亮1 %}{% endblock 关于高亮1%}">关于</a></li>
+    </ul>
+    <p class="welcome-text">
+      欢迎来到<span class="name">刘江</span>的博客~
+    </p>
+  </div>
+  {% block 主体 %}
+  {% endblock 主体 %}
+  <div class="footer-wrap">
+    <div class="footer w1000">
+      <div class="qrcode">
+        <img src="{% static  '/res/img/erweima.jpg'%}">
+      </div>
+      <div class="practice-mode">
+        <img src="{% static '/res/img/down_img.jpg'%}">
+        <div class="text">
+          <h4 class="title">我的联系方式</h4>
+          <p>微信<span class="WeChat">lj13517953394</span></p>
+          <p>邮箱<span class="email">736750759@qq.com</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="{% static '/res/layui/layui.js'%}"></script>
+  <script type="text/javascript">
+    layui.config({
+      base: '{% static  '/res/js/util/'%}'
+    }).use(['element','laypage','form','jquery','layer','menu','flow'],function(){
+      element = layui.element,laypage = layui.laypage,form = layui.form,$ = layui.$,flow = layui.flow,layer = layui.layer,menu = layui.menu;
+
+      flow.lazyimg();
+      {% block js事件 %}{% endblock js事件%}
+      menu.init();
+    })
+  </script>
+</body>
+</html>
