@@ -1,1 +1,2 @@
 Django-Blog
+这是一个基于Django框架的web轻博客
